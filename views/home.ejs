@@ -1,0 +1,47 @@
+<% include ./partials/header %>
+
+<div class="container">
+    <h2 class="text-center mb-4">MY TODOS</h2>
+
+    <% fListnames.forEach(listname => { %>
+        <div class="btn-group btn-block mt-0 mb-3" role="group">
+            <% let count = 0; %>
+            <% listname.items.forEach(item => { %>
+                <% if (item.done == true) { %>
+                    <% count++; %>
+                <% } %>
+            <% }); %>
+            <a href="/list/<%= listname._id %>" class="homes btn btn-light"><%= listname.name %><div><%= count %>/<%= listname.items.length %></div></a>
+        </div>
+    <% }); %>
+    
+    <!-- ADD NEW LIST -->
+    <div>
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addNewModal"><i class="fas fa-plus"></i></button>
+
+        <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="addNewModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addNewModalTitle">List Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/home" method="POST">
+                        <label>
+                            <input type="text" name="name">
+                        </label>
+                        <div>
+                            <button type="button" class="btn btn-secondary float-right ml-2" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary float-right">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>

@@ -1,0 +1,72 @@
+<% include ./partials/header %>
+<div class="container">
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:history.back()">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%= fList.name %></li>
+    </ol>
+    </nav>
+    <h2 class="text-center"><%= fList.name %></h2>
+    
+    <div class="card">
+        <ul class="list-group list-group-flush">
+            <% fList.items.forEach(item => { %> 
+                <% let num = fList.items.indexOf(item); %>
+                <li class="list-group-item">
+                    <div class="custom-control custom-checkbox">
+                        <div class="row">
+                            <div class="col-8">
+                                <form name="formItem" action="/list/<%= fList._id %>?_method=PUT" method="POST">
+                                    <input name="itemId" type="text" value="<%= item._id %>" style="visibility: hidden; width: 0; height: 0;">
+                                    <% if (item.done == true) { %>
+                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing<%= num %>" onchange="this.form.submit()" checked>
+                                        <label class="custom-control-label float-left" for="customControlAutosizing<%= num %>"><%= item.task %></label>
+                                    <% } else { %>
+                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing<%= num %>" onchange="this.form.submit()">
+                                        <label class="custom-control-label float-left" for="customControlAutosizing<%= num %>"><%= item.task %></label>
+                                    <% } %>
+                                </form>
+                            </div>
+                            <div class="col-4">
+                                <form action="/list/<%= fList._id %>?_method=DELETE" method="POST">
+                                    <input name="itemId" type="text" value="<%= item._id %>" style="visibility: hidden; width: 0; height: 0;">
+                                    <button type="submit" class="btn btn-secondary btn-sm float-right del"><i class="far fa-trash-alt"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </li>     
+            <% }); %>
+        </ul>
+    </div>
+
+    <!-- ADD NEW ITEM -->
+    <div>
+        <button type="button" class="btn btn-primary btn-block mt-2" data-toggle="modal" data-target="#newItemModal"><i class="fas fa-plus"></i></button>
+
+        <div class="modal fade" id="newItemModal" tabindex="-1" role="dialog" aria-labelledby="newItemModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newItemModalTitle">New Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/list/<%= fList._id %>" method="POST">
+                        <label>
+                            <input type="text" name="task" placeholder="<date/time> <task>" required>
+                        </label>
+                        <div>
+                            <button type="button" class="btn btn-secondary float-right ml-2" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary float-right">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ./partials/footer %>
