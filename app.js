@@ -21,12 +21,15 @@ app.post("/", (req, res) => {
     res.redirect(`/home/${req.body.password}`);
 });
 
+const code;
+
 app.get("/home/:pass", (req, res) => {
     if (req.params.pass == "lemmein") {
+        code = "lemmein";
         Listname.find({}).populate("items").exec((err, fListnames) => {
             if (err) {console.log(err);}
             else {
-                res.render("home.ejs", {fListnames: fListnames});
+                res.render("home.ejs", {fListnames: fListnames, code: code});
             }
         });
     } else {
@@ -34,9 +37,9 @@ app.get("/home/:pass", (req, res) => {
     }
 });
 
-app.post("/home", (req, res) => {
+app.post("/home/lemmein", (req, res) => {
     Listname.create({name: req.body.name});
-    res.redirect("/home");
+    res.redirect("/home/" + code);
 });
 
 app.get("/list/:id", (req, res) => {
