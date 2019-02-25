@@ -21,7 +21,7 @@ app.post("/", (req, res) => {
     res.redirect(`/home/${req.body.password}`);
 });
 
-const code;
+let code;
 
 app.get("/home/:pass", (req, res) => {
     if (req.params.pass == "lemmein") {
@@ -46,7 +46,7 @@ app.get("/list/:id", (req, res) => {
     Listname.findById(req.params.id).populate("items").exec((err, fListname) => {
         if (err) {console.log(err);}
         else {
-            res.render("list.ejs", {fList: fListname});
+            res.render("list.ejs", {fList: fListname, code: code});
         }
     });
 });

@@ -2,7 +2,7 @@
 <div class="container">
     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="javascript:history.back()">Home</a></li>
+        <li class="breadcrumb-item"><a href="/home/<%= code %>">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page"><%= fList.name %></li>
     </ol>
     </nav>
@@ -59,8 +59,8 @@
                             <input type="text" name="task" placeholder="<date/time> <task>" required>
                         </label>
                         <div>
-                            <button type="button" class="btn btn-secondary float-right ml-2" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary float-right">Save</button>
+                            <button type="button" class="btn btn-secondary float-right mr-2" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
