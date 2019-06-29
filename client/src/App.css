@@ -1,0 +1,33 @@
+html, body {
+  height: 100%;
+  background-color: rgb(246,246,246) !important;
+} body {
+min-height: 100%;
+} .home-btn, .l-g, .li-form > .card {
+box-shadow: 6px 7px 0px -1px rgba(205,205,205,0.8);
+} .home-btn > .homes {
+background-color: #ffffff;
+} .home-btn > .homes:hover {
+background-color: #ffffff50;
+} .home-btn > .homes, .btn-toolbar > .mdl, .li-form > .card > .card-body > form > .btn {
+border: 1px orange;
+border-radius: 0%;
+} .mdl {
+box-shadow: 6px 7px 0px -1px rgba(205,205,205,0.8);
+border: 0px !important;
+} .ml-auto {
+box-shadow: 5px 6px 0px -1px rgba(205,205,205,0.8);
+} nav > .breadcrumb {
+background-color: rgb(40,40,40);
+border-radius: 0%;
+} .breadcrumb-item+.breadcrumb-item::before {
+color: white !important;
+} .custom-control-input:checked~.custom-control-label::before {
+background-color: #f36523 !important;
+border: 0px;
+} .home-btn > .homes, h2 {
+color: rgb(74,74,74);
+} .list-group > .list-group-item:first-child, .list-group > .list-group-item:last-child {
+border-radius: 0%;
+background-color: #ffffff;
+}
