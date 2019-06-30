@@ -14,13 +14,13 @@ export default class Home extends Component {
     };
   }
 
-  onChangeList = e => {
+  onChangeList(e) {
     this.setState({
       newList: e.target.value
     });
   }
 
-  onSubmit = e => {
+  onSubmit(e) {
     e.preventDefault();
     console.log("Submitted");
     axios.post("/home/lemmein", {
@@ -56,7 +56,7 @@ export default class Home extends Component {
             name: listItem.name,
             items: [...objArray]
           }]}));
-      })
+      });
     })
     .catch(err => console.log(err));
   }
@@ -64,15 +64,17 @@ export default class Home extends Component {
   listList = () => {
     return this.state.list.map(listname => {
       let count = 0;
-      listname.items.forEach(item => {
-        if (item.done) count++;
-      });
-      return (
-        <button className="home-btn btn-group btn-block mt-0 mb-3 p-0 border-0" role="group">
-          <Link to={`/list/${listname.key}`} className="homes btn p-0 border-0">{listname.name}<div>{count}/{listname.items.length}</div></Link>
-        </button>
-      )
-    })
+      if (listname) {
+        listname.items.forEach(item => {
+          if (item.done) count++;
+        });
+        return (
+          <button className="home-btn btn-group btn-block mt-0 mb-3 p-0 border-0" role="group">
+            <Link to={`/list/${listname.key}`} className="homes btn p-0 border-0">{listname.name}<div>{count}/{listname.items.length}</div></Link>
+          </button>
+        )
+      } else return null;
+    });
   }
 
   render() {
@@ -89,9 +91,9 @@ export default class Home extends Component {
         ><i className="fa fa-plus fa-lg"></i></Button>
 
         <VertModal
-          //change={this.onChangeList}
+          change={e => this.onChangeList(e)}
           new={this.state.newList}
-          //submit={this.onSubmit}
+          submit={e => this.onSubmit(e)}
           show={this.state.modalShow}
           onHide={modalClose}
           title={"List Name"}

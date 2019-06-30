@@ -4,9 +4,14 @@ import { Button, Container, ButtonToolbar, ListGroup, Form, Breadcrumb, Row } fr
 import  VertModal from "../components/modal";
 import "font-awesome/css/font-awesome.min.css";
 
+/*
+axios.delete delete based on params
+*/
+
 export default class List extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       key: this.props.match.params.id,
       curList: "",
@@ -16,7 +21,7 @@ export default class List extends Component {
     }
   }
 
-  onChangeItem = e => {
+  onChangeItem(e) {
     this.setState({
       newItem: e.target.value
     });
@@ -31,9 +36,8 @@ export default class List extends Component {
 
   onSubmitRM = e => {
     let curId = e.target.id;
-    axios.delete(`/list/${this.state.key}/${curId}`).then(res => {console.log("Deleted: " + curId); console.log("Item:\n" + res)});
-
-    this.setState(state => ({items: this.state.items.filter((item) => (item.key !== curId))}));
+    axios.delete(`/list/${curId}`).then(res => {console.log("Deleted: " + curId); console.log("Item:\n" + res)});
+    this.setState(state => ({items: state.items.filter((item) => (item.key !== curId))}));
   }
 
   sleep = (ms) => {
@@ -42,7 +46,7 @@ export default class List extends Component {
     });
   }
 
-  onSubmit = async e => {
+  async onSubmit(e) {
     e.preventDefault();
     console.log("Submitted");
     axios.post(`/list/${this.state.key}`, {
@@ -88,8 +92,8 @@ export default class List extends Component {
     return this.state.items.map(item => {
       console.log(item);
       return (
-        <ListGroup.Item key={item.key} className="i-l">
-          <Form className="i-l">
+        <ListGroup.Item className="i-l">
+          <Form className="i-l" >
             <Row>
             { item.done ? (
               <Form.Check custom className="m-2" type="checkbox" id={item.key} label={item.task} onClick={this.onSubmitCB} defaultChecked/> 
@@ -97,7 +101,7 @@ export default class List extends Component {
               <Form.Check custom className="m-2" type="checkbox" id={item.key} label={item.task} onClick={this.onSubmitCB}/> 
             )}
 
-            <Button variant="danger" type="button" className="ml-auto" id={item.key} style={{backgroundColor: "rgb(40,40,40)", color: "rgb(246,246,246)", border:"0",  borderRadius:"0%"}} onClick={this.onSubmitRM}><i className="fa fa-trash fa-md"></i></Button>
+            <Button variant="danger" type="button" className="ml-auto" id={item.key} style={{backgroundColor: "rgb(40,40,40)", color: "rgb(246,246,246)", border:"0",  borderRadius:"0%"}} onClick={this.onSubmitRM}><i id={item.key} className="fa fa-trash fa-md"></i></Button>
             </Row>
           </Form>
         </ListGroup.Item>
@@ -125,9 +129,9 @@ export default class List extends Component {
           ><i className="fa fa-plus fa-lg"></i></Button>
 
           <VertModal
-            change={this.onChangeItem}
+            change={(e) => this.onChangeItem(e)}
             new={this.state.newItem}
-            submit={this.onSubmit}
+            submit={(e) => this.onSubmit(e)}
             show={this.state.modalShow}
             onHide={modalClose}
             title={"Item Name"}

@@ -4,12 +4,12 @@ const Item = require("../../models/item");
 const Listname = require("../../models/listname");
 
 //show list of todo topics
-// router.get("/home/lemmein", (req, res) => {
-//   Listname.find({}).populate("items").exec((err, fListnames) => {
-//     if (err) console.log(err);
-//     else res.json(fListnames);
-//   });
-// });
+router.get("/home/lemmein", (req, res) => {
+  Listname.find({}).populate("items").exec((err, fListnames) => {
+    if (err) console.log(err);
+    else res.json(fListnames);
+  });
+});
 
 //add new todo topic
 router.post("/home/lemmein", (req, res) => {
@@ -57,7 +57,7 @@ router.put("/list/:id", async (req, res) => {
 })
 
 //delete task
-router.delete("/list/:id/:itemid", async (req, res) => {
+router.delete("/list/:itemid", async (req, res) => {
   try {
     const curId = req.params.itemid;
     console.log("req.params: " + JSON.stringify(req.params));

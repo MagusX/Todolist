@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Button, Form, Modal, ButtonGroup } from "react-bootstrap";
 
+/*
+{...this.props}
+*/
+
 export default class VertModal extends Component {
   render() {
     return (
