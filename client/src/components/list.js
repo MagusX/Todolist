@@ -30,12 +30,10 @@ export default class List extends Component {
   }
 
   onSubmitRM = e => {
-    const target = e.target;
-    axios.delete(`/list/${this.state.key}`, {
-      data : {itemId:target.id}
-    }).then(console.log("Deleted: " + target.id));
+    let curId = e.target.id;
+    axios.delete(`/list/${this.state.key}/${curId}`).then(res => {console.log("Deleted: " + curId); console.log("Item:\n" + res)});
 
-    this.setState(state => ({items: this.state.items.filter((item) => (item.key !== target.id))}));
+    this.setState(state => ({items: this.state.items.filter((item) => (item.key !== curId))}));
   }
 
   sleep = (ms) => {

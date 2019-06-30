@@ -65,8 +65,8 @@ export default class Home extends Component {
   listList = () => {
     return this.state.list.map(listname => {
       let count = 0;
-      listname.items.map(item => {
-        if (item.done) return count++;
+      listname.items.forEach(item => {
+        if (item.done) count++;
       });
       return (
         <button className="home-btn btn-group btn-block mt-0 mb-3 p-0 border-0" role="group">

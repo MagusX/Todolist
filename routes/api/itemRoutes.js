@@ -57,10 +57,15 @@ router.put("/list/:id", async (req, res) => {
 })
 
 //delete task
-router.delete("/list/:id", async (req, res) => {
-  const dItem = await Item.deleteOne({_id:req.body.itemId})
-  await res.json(dItem);
-  await console.log("deleted");
+router.delete("/list/:id/:itemid", async (req, res) => {
+  try {
+    const curId = req.params.itemid;
+    console.log("req.params: " + JSON.stringify(req.params));
+    const dItem = await Item.deleteOne({_id:curId})
+    await res.json(dItem);
+    await console.log("Deleted: " + curId);
+  } catch(err) {console.log(err)}
+  
 });
 
 module.exports = router;
