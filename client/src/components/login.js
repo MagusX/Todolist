@@ -11,7 +11,7 @@ class Login extends Component {
 
   check = () => {
     if (this.state.pass !== "lemmein") return "/";
-    else return "/home/lemmein";
+    else return "/lemmein";
   }
 
   onChange = e => {

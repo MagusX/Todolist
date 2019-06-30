@@ -70,7 +70,7 @@ export default class Home extends Component {
         });
         return (
           <button className="home-btn btn-group btn-block mt-0 mb-3 p-0 border-0" role="group">
-            <Link to={`/list/${listname.key}`} className="homes btn p-0 border-0">{listname.name}<div>{count}/{listname.items.length}</div></Link>
+            <Link to={`${listname.key}`} className="homes btn p-0 border-0">{listname.name}<div>{count}/{listname.items.length}</div></Link>
           </button>
         )
       } else return null;

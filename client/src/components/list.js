@@ -114,7 +114,7 @@ export default class List extends Component {
     return (
       <Container>
         <Breadcrumb>
-        <Breadcrumb.Item style={{color: "#f36523"}} href="/home/lemmein">Home</Breadcrumb.Item>
+        <Breadcrumb.Item style={{color: "#f36523"}} href="/lemmein">Home</Breadcrumb.Item>
         <Breadcrumb.Item style={{color: "white"}} active>{this.state.curList}</Breadcrumb.Item>
         </Breadcrumb>
         <h2 style={{textAlign: "center"}}>{this.state.curList}</h2>

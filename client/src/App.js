@@ -10,8 +10,8 @@ function App() {
     <div className="App">
       <Switch>
           <Route exact path="/" component={Login} />
-          <Route exact path="/home/lemmein" component={Home} />
-          <Route path="/list/:id" component={List} />
+          <Route exact path="/lemmein" component={Home} />
+          <Route path="/:id" component={List} />
       </Switch>
 
       <link
