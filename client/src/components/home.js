@@ -43,45 +43,44 @@ export default class Home extends Component {
     .catch(err => console.log(err));
   }
 
-  // componentDidMount() {
-  //   axios.get("/home/lemmein")
-  //   .then(res => {
-  //     console.log(res.data);
-  //     res.data.map(listItem => {
-  //       let objArray = [];
-  //       listItem.items.forEach(item => {
-  //         objArray.push(item);
-  //       });
-  //       return this.setState(state => ({list: [...state.list, {
-  //           key: listItem._id,
-  //           name: listItem.name,
-  //           items: [...objArray]
-  //         }]}));
-  //     })
-  //   })
-  //   .catch(err => console.log(err));
-  // }
+  componentDidMount() {
+    axios.get("/home/lemmein")
+    .then(res => {
+      res.data.map(listItem => {
+        let objArray = [];
+        listItem.items.forEach(item => {
+          objArray.push(item);
+        });
+        return this.setState(state => ({list: [...state.list, {
+            key: listItem._id,
+            name: listItem.name,
+            items: [...objArray]
+          }]}));
+      })
+    })
+    .catch(err => console.log(err));
+  }
 
-  // listList = () => {
-  //   return this.state.list.map(listname => {
-  //     let count = 0;
-  //     listname.items.forEach(item => {
-  //       if (item.done) count++;
-  //     });
-  //     return (
-  //       <button className="home-btn btn-group btn-block mt-0 mb-3 p-0 border-0" role="group">
-  //         <Link to={`/list/${listname.key}`} className="homes btn p-0 border-0">{listname.name}<div>{count}/{listname.items.length}</div></Link>
-  //       </button>
-  //     )
-  //   })
-  // }
+  listList = () => {
+    return this.state.list.map(listname => {
+      let count = 0;
+      listname.items.forEach(item => {
+        if (item.done) count++;
+      });
+      return (
+        <button className="home-btn btn-group btn-block mt-0 mb-3 p-0 border-0" role="group">
+          <Link to={`/list/${listname.key}`} className="homes btn p-0 border-0">{listname.name}<div>{count}/{listname.items.length}</div></Link>
+        </button>
+      )
+    })
+  }
 
   render() {
     let modalClose = () => this.setState({ modalShow: false });
     return (
       <Container>
       <h2 className="text-center mb-4 mt-2"><i className="fa fa-rocket fa-lg fa-spin"></i><div>MY TODOS</div></h2>
-      {/* {this.listList()} */}
+      {this.listList()}
       <ButtonToolbar>
         <Button
           className="btn btn-primary btn-block mdl"
@@ -90,9 +89,9 @@ export default class Home extends Component {
         ><i className="fa fa-plus fa-lg"></i></Button>
 
         <VertModal
-          change={this.onChangeList}
+          //change={this.onChangeList}
           new={this.state.newList}
-          submit={this.onSubmit}
+          //submit={this.onSubmit}
           show={this.state.modalShow}
           onHide={modalClose}
           title={"List Name"}
