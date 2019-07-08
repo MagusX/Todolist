@@ -5,6 +5,11 @@ import Home from "../src/components/home";
 import List from "../src/components/list";
 import Login from "../src/components/login";
 
+/*
+Single page website
+Static folder only created for 1 url layer
+*/
+
 function App() {
   return (
     <div className="App">

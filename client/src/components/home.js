@@ -4,6 +4,12 @@ import axios from "axios";
 import { Button, Container, ButtonToolbar } from "react-bootstrap";
 import  VertModal from "../components/modal";
 
+/*
+Passing function as props to child component:
+  functionName(e) {}
+  <Child propName={e => this.functionName(e)} />
+*/
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +20,7 @@ export default class Home extends Component {
     };
   }
 
+  //e.target.<attribute of element with mouse event>
   onChangeList(e) {
     this.setState({
       newList: e.target.value

@@ -5,7 +5,8 @@ import  VertModal from "../components/modal";
 import "font-awesome/css/font-awesome.min.css";
 
 /*
-axios.delete delete based on params
+axios.delete delete based on params not body
+sent by url layer
 */
 
 export default class List extends Component {
