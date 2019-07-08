@@ -57,9 +57,6 @@ router.put("/list/:id", async (req, res) => {
 })
 
 //delete task
-/*
-
-*/
 router.delete("/list/:itemid", async (req, res) => {
   try {
     const curId = req.params.itemid;
