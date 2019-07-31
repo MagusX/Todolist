@@ -8,8 +8,8 @@ const Item = require("./models/item");
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
-// mongoose.connect("mongodb://localhost/todolist", {useNewUrlParser: true});
-mongoose.connect("mongodb+srv://Tarrasque18:todolistproj@todolist-8wbrw.mongodb.net/todolist?retryWrites=true", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost/todolist", {useNewUrlParser: true});
+// mongoose.connect("mongodb+srv://Tarrasque18:todolistproj@todolist-8wbrw.mongodb.net/todolist?retryWrites=true", {useNewUrlParser: true});
 app.use(methodOverride("_method"));
 let port = process.env.PORT || 3000;
 
