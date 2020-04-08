@@ -35,4 +35,16 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <footer>
+      <div id="copyright"></div>
+  </footer>
+  <script>
+    document.getElementById("copyright").innerHTML = `Copyright &copy; 2019-<span>${Date().substr(11, 4)}</span> Brian Doan. All Rights Reserved`;
+  </script>
+  <link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+  crossOrigin="anonymous"
+  />
 </html>

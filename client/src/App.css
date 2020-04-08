@@ -30,4 +30,12 @@ color: rgb(74,74,74);
 } .list-group > .list-group-item:first-child, .list-group > .list-group-item:last-child {
 border-radius: 0%;
 background-color: #ffffff;
+} footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(40,40,40);
+  color: white;
+  text-align: center;
 }
