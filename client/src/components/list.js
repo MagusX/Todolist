@@ -125,7 +125,7 @@ export default class List extends Component {
         <ButtonToolbar>
           <Button
             className="btn btn-primary btn-block mdl"
-            style={{backgroundColor: "#f36523"}}
+            style={{backgroundColor: "#f36523", marginBottom: "40px"}}
             onClick={() => this.setState({ modalShow: true })}
           ><i className="fa fa-plus fa-lg"></i></Button>
 
