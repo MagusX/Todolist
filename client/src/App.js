@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from "react-router-dom";
+import withAuth from './components/auth/withAuth';
 import Home from "../src/components/home";
 import List from "../src/components/list";
-import Login from "../src/components/login";
+import Login from "./components/auth/login";
 
 /*
 Single page website
@@ -14,17 +15,10 @@ function App() {
   return (
     <div className="App">
       <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/lemmein" component={Home} />
-          <Route path="/:id" component={List} />
+          <Route path="/" exact component={withAuth(Home)} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/:id" component={withAuth(List)} />
       </Switch>
-
-      <link
-          rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossOrigin="anonymous"
-        />
     </div>
   );
 }

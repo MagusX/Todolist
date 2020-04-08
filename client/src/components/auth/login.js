@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { Button, Form, Card } from "react-bootstrap";
+import axios from 'axios';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       pass: ""
-    }
-  }
-
-  check = () => {
-    if (this.state.pass !== "lemmein") return "/";
-    else return "/lemmein";
+    };
+    this.headers = {
+      'Content-Type': 'application/json'
+    };
   }
 
   onChange = e => {
@@ -22,10 +21,29 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    if (this.state.pass !== "lemmein") window.location.reload();
-    this.setState({
-      pass: ""
+    axios.post('/login', {
+      password: this.state.pass
+    }, {headers: this.headers})
+    .then(res => {
+      if (res.status === 200) {
+        this.props.history.push('/');
+      } else {
+        const error = new Error(res.error);
+        throw error;
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Access denied');
     });
+  }
+
+  componentDidMount() {
+    axios.get('/login')
+    .then(res => {
+      this.setState({msg: res.data.text});
+    })
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -38,7 +56,7 @@ class Login extends Component {
               <Form.Label>Passcode</Form.Label>
               <Form.Control type="password" onChange={this.onChange} value={this.state.pass}/>
             </Form.Group>
-            <Button className="login-btn" block href={this.check()} style={{backgroundColor: "#f36523"}} type="submit" id="button">
+            <Button className="login-btn" block style={{backgroundColor: "#f36523"}} type="submit" id="button">
               Enter
             </Button>
             </Form>

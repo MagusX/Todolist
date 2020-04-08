@@ -30,7 +30,7 @@ export default class Home extends Component {
   onSubmit(e) {
     e.preventDefault();
     console.log("Submitted");
-    axios.post("/home/lemmein", {
+    axios.post("/home", {
       name: this.state.newList,
       items: []
     })
@@ -38,7 +38,7 @@ export default class Home extends Component {
     .catch(err => console.log(err));
     this.setState({newList: ""});
 
-    axios.get("/home/lemmein")
+    axios.get("/home")
     .then(res => {
       const index = res.data.length - 1;
       return this.setState(state => ({list: [...state.list, {
@@ -51,7 +51,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get("/home/lemmein")
+    axios.get("/home")
     .then(res => {
       res.data.map(listItem => {
         let objArray = [];

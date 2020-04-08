@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Item = require("../../models/item");
 const Listname = require("../../models/listname");
+const withAuth = require('../../middleware');
 
 //show list of todo topics
-router.get("/home/lemmein", (req, res) => {
+router.get("/home", withAuth, (req, res) => {
   Listname.find({}).populate("items").exec((err, fListnames) => {
     if (err) console.log(err);
     else res.json(fListnames);
@@ -12,7 +13,7 @@ router.get("/home/lemmein", (req, res) => {
 });
 
 //add new todo topic
-router.post("/home/lemmein", (req, res) => {
+router.post("/home", withAuth, (req, res) => {
   Listname.create({
     name: req.body.name,
     items: req.body.items
@@ -20,7 +21,7 @@ router.post("/home/lemmein", (req, res) => {
 });
 
 //todos of 1 topic
-router.get("/list/:id", (req, res) => {
+router.get("/list/:id", withAuth, (req, res) => {
   Listname.findById(req.params.id).populate("items").exec((err, fListname) => {
       if (err) {console.log(err);}
       else (res.json(fListname));
@@ -28,7 +29,7 @@ router.get("/list/:id", (req, res) => {
 });
 
 //add new todo of 1 topic
-router.post("/list/:id", (req, res) => {
+router.post("/list/:id", withAuth, (req, res) => {
   Listname.findById(req.params.id, (err, fListname) => {
     if (err) console.log(err);
     else {
@@ -49,7 +50,7 @@ router.post("/list/:id", (req, res) => {
 });
 
 //update task
-router.put("/list/:id", async (req, res) => {
+router.put("/list/:id", withAuth, async (req, res) => {
   const fItem = await Item.findById(req.body.itemId);
   await Item.updateOne({_id: req.body.itemId}, {done: !fItem.done})
   .then(updateItem => res.json(updateItem))
@@ -57,7 +58,7 @@ router.put("/list/:id", async (req, res) => {
 })
 
 //delete task
-router.delete("/list/:itemid", async (req, res) => {
+router.delete("/list/:itemid", withAuth, async (req, res) => {
   try {
     const curId = req.params.itemid;
     console.log("req.params: " + JSON.stringify(req.params));
