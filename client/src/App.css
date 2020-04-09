@@ -38,4 +38,8 @@ background-color: #ffffff;
   background-color: rgb(40,40,40);
   color: white;
   text-align: center;
+} #off {
+  top: 5px;
+  right: 5px;
+  position: fixed;
 }
