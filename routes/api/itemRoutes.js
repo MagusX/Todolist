@@ -52,7 +52,7 @@ router.post("/list/:id", withAuth, (req, res) => {
 //update task
 router.put("/list/:id", withAuth, async (req, res) => {
   const fItem = await Item.findById(req.body.itemId);
-  await Item.updateOne({_id: req.body.itemId}, {done: !fItem.done})
+  Item.updateOne({_id: req.body.itemId}, {done: !fItem.done})
   .then(updateItem => res.json(updateItem))
   .catch(err => console.log(err));
 })
@@ -61,10 +61,8 @@ router.put("/list/:id", withAuth, async (req, res) => {
 router.delete("/list/:itemid", withAuth, async (req, res) => {
   try {
     const curId = req.params.itemid;
-    console.log("req.params: " + JSON.stringify(req.params));
     const dItem = await Item.deleteOne({_id:curId})
-    await res.json(dItem);
-    await console.log("Deleted: " + curId);
+    res.json(dItem);
   } catch(err) {console.log(err)}
   
 });
